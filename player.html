@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Player - Toxy18</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .player-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .video-player {
+            background-color: #000;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        .video-player video {
+            width: 100%;
+            display: block;
+        }
+        
+        .video-info {
+            background-color: #1a1a1a;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .video-info h1 {
+            margin-bottom: 10px;
+            color: #fff;
+        }
+        
+        .video-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            color: #aaa;
+        }
+        
+        .video-actions {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .action-btn {
+            background: none;
+            border: none;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .action-btn i {
+            font-size: 18px;
+        }
+        
+        .action-btn:hover {
+            color: #ff0000;
+        }
+        
+        .video-description {
+            color: #ddd;
+            line-height: 1.6;
+        }
+        
+        .related-videos {
+            margin-top: 30px;
+        }
+        
+        .related-videos h2 {
+            margin-bottom: 15px;
+            color: #fff;
+        }
+        
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        
+        @media (max-width: 768px) {
+            .video-meta {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .video-actions {
+                width: 100%;
+                justify-content: space-between;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">
+            <h1>Toxy18</h1>
+        </div>
+        <div class="nav-links">
+            <a href="index.html"><i class="fas fa-home"></i> Home</a>
+            <a href="trending.html"><i class="fas fa-fire"></i> Trending</a>
+            <a href="new.html"><i class="fas fa-plus-circle"></i> New</a>
+            <a href="tiktok.html"><i class="fab fa-tiktok"></i> TikTok</a>
+        </div>
+        <div class="menu-btn">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- Video Player -->
+    <div class="player-container">
+        <div class="video-player">
+            <video id="main-video" controls autoplay></video>
+        </div>
+        
+        <div class="video-info">
+            <h1 id="video-title">Video Title</h1>
+            <div class="video-meta">
+                <div class="video-stats">
+                    <span id="video-views">0 views</span> • 
+                    <span id="video-date">October 15, 2023</span>
+                </div>
+                <div class="video-actions">
+                    <button class="action-btn like-btn">
+                        <i class="far fa-thumbs-up"></i>
+                        <span>Like</span>
+                    </button>
+                    <button class="action-btn share-btn">
+                        <i class="fas fa-share"></i>
+                        <span>Share</span>
+                    </button>
+                    <button class="action-btn save-btn">
+                        <i class="far fa-bookmark"></i>
+                        <span>Save</span>
+                    </button>
+                    <button class="action-btn report-btn">
+                        <i class="fas fa-flag"></i>
+                        <span>Report</span>
+                    </button>
+                </div>
+            </div>
+            <div class="video-description" id="video-description">
+                Video description will appear here.
+            </div>
+        </div>
+        
+        <div class="related-videos">
+            <h2>Related Videos</h2>
+            <div class="related-grid" id="related-videos-grid">
+                <!-- Related videos will be dynamically loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2023 Toxy18. All rights reserved.</p>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const menuBtn = document.querySelector('.menu-btn');
+            const navLinks = document.querySelector('.nav-links');
+
+            if (menuBtn) {
+                menuBtn.addEventListener('click', function() {
+                    navLinks.classList.toggle('active');
+                });
+            }
+            
+            // Get video ID from URL parameter
+            const urlParams = new URLSearchParams(window.location.search);
+            const videoId = urlParams.get('id');
+            
+            if (videoId) {
+                // Load video details
+                loadVideoDetails(videoId);
+                
+                // Load related videos
+                loadRelatedVideos(videoId);
+            } else {
+                // Redirect to home page if no video ID is provided
+                window.location.href = 'index.html';
+            }
+            
+            // Set up action buttons
+            setupActionButtons();
+        });
+        
+        function loadVideoDetails(videoId) {
+            // In a real application, you would fetch video details from the server
+            // For now, we'll use sample data
+            const videoDetails = {
+                id: videoId,
+                title: 'Sample Video Title',
+                description: 'This is a sample video description. It provides information about the video content and can include details about the creator, the context, and other relevant information.',
+                videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-going-down-a-curved-highway-through-a-mountain-range-41576-large.mp4',
+                views: 12345,
+                date: '2023-10-15',
+                likes: 1234,
+                dislikes: 56
+            };
+            
+            // Set video source
+            const mainVideo = document.getElementById('main-video');
+            if (mainVideo) {
+                mainVideo.src = videoDetails.videoUrl;
+            }
+            
+            // Set video title
+            const videoTitle = document.getElementById('video-title');
+            if (videoTitle) {
+                videoTitle.textContent = videoDetails.title;
+            }
+            
+            // Set video views
+            const videoViews = document.getElementById('video-views');
+            if (videoViews) {
+                videoViews.textContent = formatNumber(videoDetails.views) + ' views';
+            }
+            
+            // Set video date
+            const videoDate = document.getElementById('video-date');
+            if (videoDate) {
+                videoDate.textContent = formatDate(videoDetails.date);
+            }
+            
+            // Set video description
+            const videoDescription = document.getElementById('video-description');
+            if (videoDescription) {
+                videoDescription.textContent = videoDetails.description;
+            }
+            
+            // Update document title
+            document.title = videoDetails.title + ' - Toxy18';
+        }
+        
+        function loadRelatedVideos(currentVideoId) {
+            // In a real application, you would fetch related videos from the server
+            // For now, we'll use sample data
+            const relatedVideos = [
+                {
+                    id: 'rel1',
+                    title: 'Related Video 1',
+                    thumbnail: 'https://via.placeholder.com/300x169',
+                    directLink: 'player.html?id=rel1',
+                    views: 5432,
+                    date: '2023-10-14'
+                },
+                {
+                    id: 'rel2',
+                    title: 'Related Video 2',
+                    thumbnail: 'https://via.placeholder.com/300x169',
+                    directLink: 'player.html?id=rel2',
+                    views: 3214,
+                    date: '2023-10-13'
+                },
+                {
+                    id: 'rel3',
+                    title: 'Related Video 3',
+                    thumbnail: 'https://via.placeholder.com/300x169',
+                    directLink: 'player.html?id=rel3',
+                    views: 7654,
+                    date: '2023-10-12'
+                },
+                {
+                    id: 'rel4',
+                    title: 'Related Video 4',
+                    thumbnail: 'https://via.placeholder.com/300x169',
+                    directLink: 'player.html?id=rel4',
+                    views: 2345,
+                    date: '2023-10-11'
+                }
+            ];
+            
+            const relatedVideosGrid = document.getElementById('related-videos-grid');
+            if (relatedVideosGrid) {
+                relatedVideos.forEach(video => {
+                    if (video.id !== currentVideoId) {
+                        relatedVideosGrid.appendChild(createRelatedVideoCard(video));
+                    }
+                });
+            }
+        }
+        
+        function createRelatedVideoCard(video) {
+            const videoCard = document.createElement('div');
+            videoCard.className = 'video-card';
+            
+            videoCard.innerHTML = `
+                <div class="thumbnail">
+                    <img src="${video.thumbnail}" alt="${video.title}">
+                    <button class="play-btn"><i class="fas fa-play"></i></button>
+                </div>
+                <div class="video-info">
+                    <h3>${video.title}</h3>
+                    <p>${formatNumber(video.views)} views • ${formatDate(video.date)}</p>
+                </div>
+            `;
+            
+            // Add click event to navigate to the video
+            videoCard.addEventListener('click', function() {
+                window.location.href = video.directLink;
+            });
+            
+            return videoCard;
+        }
+        
+        function setupActionButtons() {
+            // Like button
+            const likeBtn = document.querySelector('.like-btn');
+            if (likeBtn) {
+                likeBtn.addEventListener('click', function() {
+                    const icon = this.querySelector('i');
+                    if (icon.classList.contains('far')) {
+                        icon.classList.remove('far');
+                        icon.classList.add('fas');
+                        this.classList.add('active');
+                    } else {
+                        icon.classList.remove('fas');
+                        icon.classList.add('far');
+                        this.classList.remove('active');
+                    }
+                });
+            }
+            
+            // Share button
+            const shareBtn = document.querySelector('.share-btn');
+            if (shareBtn) {
+                shareBtn.addEventListener('click', function() {
+                    // In a real application, you would implement sharing functionality
+                    // For now, we'll just copy the current URL to clipboard
+                    const currentUrl = window.location.href;
+                    
+                    // Create a temporary input element
+                    const tempInput = document.createElement('input');
+                    tempInput.value = currentUrl;
+                    document.body.appendChild(tempInput);
+                    
+                    // Select and copy the URL
+                    tempInput.select();
+                    document.execCommand('copy');
+                    
+                    // Remove the temporary input
+                    document.body.removeChild(tempInput);
+                    
+                    // Show a notification
+                    alert('Video URL copied to clipboard!');
+                });
+            }
+            
+            // Save button
+            const saveBtn = document.querySelector('.save-btn');
+            if (saveBtn) {
+                saveBtn.addEventListener('click', function() {
+                    const icon = this.querySelector('i');
+                    if (icon.classList.contains('far')) {
+                        icon.classList.remove('far');
+                        icon.classList.add('fas');
+                        this.classList.add('active');
+                        alert('Video saved to your library!');
+                    } else {
+                        icon.classList.remove('fas');
+                        icon.classList.add('far');
+                        this.classList.remove('active');
+                        alert('Video removed from your library!');
+                    }
+                });
+            }
+            
+            // Report button
+            const reportBtn = document.querySelector('.report-btn');
+            if (reportBtn) {
+                reportBtn.addEventListener('click', function() {
+                    // In a real application, you would implement reporting functionality
+                    // For now, we'll just show an alert
+                    alert('Thank you for reporting this video. Our team will review it shortly.');
+                });
+            }
+        }
+        
+        // Helper function to format date
+        function formatDate(dateString) {
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            return new Date(dateString).toLocaleDateString(undefined, options);
+        }
+        
+        // Helper function to format numbers (e.g., 1.2K, 3.4M)
+        function formatNumber(num) {
+            if (num >= 1000000) {
+                return (num / 1000000).toFixed(1) + 'M';
+            } else if (num >= 1000) {
+                return (num / 1000).toFixed(1) + 'K';
+            } else {
+                return num.toString();
+            }
+        }
+    </script>
+</body>
+</html>

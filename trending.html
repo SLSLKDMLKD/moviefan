@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trending Videos - Toxy18</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">
+            <h1>Toxy18</h1>
+        </div>
+        <div class="nav-links">
+            <a href="index.html"><i class="fas fa-home"></i> Home</a>
+            <a href="trending.html" class="active"><i class="fas fa-fire"></i> Trending</a>
+            <a href="new.html"><i class="fas fa-plus-circle"></i> New</a>
+            <a href="tiktok.html"><i class="fab fa-tiktok"></i> TikTok</a>
+        </div>
+        <div class="menu-btn">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <section class="trending-videos">
+            <h2>Trending Videos</h2>
+            <div class="video-grid" id="trending-grid">
+                <!-- Trending videos will be dynamically loaded here -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Toxy18. All rights reserved.</p>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Fetch trending videos
+            fetchTrendingVideos();
+        });
+
+        function fetchTrendingVideos() {
+            // This would normally be an API call to your backend
+            // For now, we'll use sample data
+            const sampleVideos = [
+                {
+                    id: 1,
+                    title: 'Trending Video 1',
+                    thumbnail: 'https://via.placeholder.com/300x169',
+                    directLink: 'https://example.com/trending1',
+                    date: '2023-10-15'
+                },
+                {
+                    id: 2,
+                    title: 'Trending Video 2',
+                    thumbnail: 'https://via.placeholder.com/300x169',
+                    directLink: 'https://example.com/trending2',
+                    date: '2023-10-14'
+                },
+                {
+                    id: 3,
+                    title: 'Trending Video 3',
+                    thumbnail: 'https://via.placeholder.com/300x169',
+                    directLink: 'https://example.com/trending3',
+                    date: '2023-10-13'
+                },
+                {
+                    id: 4,
+                    title: 'Trending Video 4',
+                    thumbnail: 'https://via.placeholder.com/300x169',
+                    directLink: 'https://example.com/trending4',
+                    date: '2023-10-12'
+                },
+                {
+                    id: 5,
+                    title: 'Trending Video 5',
+                    thumbnail: 'https://via.placeholder.com/300x169',
+                    directLink: 'https://example.com/trending5',
+                    date: '2023-10-11'
+                },
+                {
+                    id: 6,
+                    title: 'Trending Video 6',
+                    thumbnail: 'https://via.placeholder.com/300x169',
+                    directLink: 'https://example.com/trending6',
+                    date: '2023-10-10'
+                },
+                {
+                    id: 7,
+                    title: 'Trending Video 7',
+                    thumbnail: 'https://via.placeholder.com/300x169',
+                    directLink: 'https://example.com/trending7',
+                    date: '2023-10-09'
+                },
+                {
+                    id: 8,
+                    title: 'Trending Video 8',
+                    thumbnail: 'https://via.placeholder.com/300x169',
+                    directLink: 'https://example.com/trending8',
+                    date: '2023-10-08'
+                }
+            ];
+
+            const trendingGrid = document.getElementById('trending-grid');
+            if (trendingGrid) {
+                sampleVideos.forEach(video => {
+                    trendingGrid.appendChild(createVideoCard(video));
+                });
+            }
+        }
+    </script>
+</body>
+</html>

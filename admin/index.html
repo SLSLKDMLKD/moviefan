@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Toxy18</title>
+    <link rel="stylesheet" href="../css/admin-style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="admin-container">
+        <div class="sidebar">
+            <div class="logo">
+                <h2>Toxy18 Admin</h2>
+            </div>
+            <nav class="admin-nav">
+                <a href="#" class="active" data-section="dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                <a href="#" data-section="videos"><i class="fas fa-video"></i> Videos</a>
+                <a href="#" data-section="tiktok"><i class="fab fa-tiktok"></i> TikTok Videos</a>
+                <a href="#" data-section="settings"><i class="fas fa-cog"></i> Settings</a>
+                <a href="../index.html" target="_blank"><i class="fas fa-external-link-alt"></i> View Site</a>
+            </nav>
+        </div>
+        
+        <div class="main-content">
+            <header class="admin-header">
+                <div class="search-bar">
+                    <input type="text" placeholder="Search...">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+                <div class="admin-profile">
+                    <span>Admin User</span>
+                    <img src="https://via.placeholder.com/40" alt="Admin">
+                </div>
+            </header>
+            
+            <div class="content-area">
+                <!-- Dashboard Section -->
+                <section id="dashboard" class="active-section">
+                    <h1>Dashboard</h1>
+                    <div class="stats-container">
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-video"></i></div>
+                            <div class="stat-info">
+                                <h3>Total Videos</h3>
+                                <p>124</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-eye"></i></div>
+                            <div class="stat-info">
+                                <h3>Total Views</h3>
+                                <p>45,782</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-users"></i></div>
+                            <div class="stat-info">
+                                <h3>Users</h3>
+                                <p>1,245</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-heart"></i></div>
+                            <div class="stat-info">
+                                <h3>Likes</h3>
+                                <p>23,456</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="recent-activity">
+                        <h2>Recent Activity</h2>
+                        <div class="activity-list">
+                            <div class="activity-item">
+                                <div class="activity-icon"><i class="fas fa-upload"></i></div>
+                                <div class="activity-details">
+                                    <h4>New Video Uploaded</h4>
+                                    <p>Video "Example Video Title" was uploaded</p>
+                                    <span class="activity-time">2 hours ago</span>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon"><i class="fas fa-user-plus"></i></div>
+                                <div class="activity-details">
+                                    <h4>New User Registered</h4>
+                                    <p>User "username123" has registered</p>
+                                    <span class="activity-time">5 hours ago</span>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon"><i class="fas fa-comment"></i></div>
+                                <div class="activity-details">
+                                    <h4>New Comment</h4>
+                                    <p>User "viewer456" commented on "Video Title"</p>
+                                    <span class="activity-time">1 day ago</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Videos Section -->
+                <section id="videos">
+                    <h1>Manage Videos</h1>
+                    <div class="action-buttons">
+                        <button id="add-video-btn" class="primary-btn"><i class="fas fa-plus"></i> Add New Video</button>
+                    </div>
+                    
+                    <div class="video-list">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Thumbnail</th>
+                                    <th>Title</th>
+                                    <th>Category</th>
+                                    <th>Date Added</th>
+                                    <th>Views</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="video-table-body">
+                                <!-- Video rows will be dynamically loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+                
+                <!-- TikTok Videos Section -->
+                <section id="tiktok">
+                    <h1>Manage TikTok Videos</h1>
+                    <div class="action-buttons">
+                        <button id="add-tiktok-btn" class="primary-btn"><i class="fas fa-plus"></i> Add New TikTok Video</button>
+                    </div>
+                    
+                    <div class="video-list">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Preview</th>
+                                    <th>Title</th>
+                                    <th>Date Added</th>
+                                    <th>Likes</th>
+                                    <th>Shares</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tiktok-table-body">
+                                <!-- TikTok video rows will be dynamically loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+                
+                <!-- Settings Section -->
+                <section id="settings">
+                    <h1>Settings</h1>
+                    <div class="settings-form">
+                        <div class="form-group">
+                            <label for="site-title">Site Title</label>
+                            <input type="text" id="site-title" value="Toxy18">
+                        </div>
+                        <div class="form-group">
+                            <label for="site-description">Site Description</label>
+                            <textarea id="site-description">Toxy18 - Video Streaming Platform</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="logo-url">Logo URL</label>
+                            <input type="text" id="logo-url" value="">
+                        </div>
+                        <div class="form-group">
+                            <label for="videos-per-page">Videos Per Page</label>
+                            <input type="number" id="videos-per-page" value="12">
+                        </div>
+                        <div class="form-group">
+                            <button class="primary-btn">Save Settings</button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Add Video Modal -->
+    <div id="add-video-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Add New Video</h2>
+            <form id="add-video-form">
+                <div class="form-group">
+                    <label for="video-title">Title</label>
+                    <input type="text" id="video-title" required>
+                </div>
+                <div class="form-group">
+                    <label for="video-description">Description</label>
+                    <textarea id="video-description"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="video-category">Category</label>
+                    <select id="video-category">
+                        <option value="entertainment">Entertainment</option>
+                        <option value="music">Music</option>
+                        <option value="sports">Sports</option>
+                        <option value="gaming">Gaming</option>
+                        <option value="education">Education</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="video-thumbnail">Thumbnail URL</label>
+                    <input type="text" id="video-thumbnail" required>
+                </div>
+                <div class="form-group">
+                    <label for="video-url">Video URL</label>
+                    <input type="text" id="video-url" required>
+                </div>
+                <div class="form-group">
+                    <label for="direct-link">Direct Link</label>
+                    <input type="text" id="direct-link" required>
+                </div>
+                <div class="form-group">
+                    <label for="trending-checkbox">
+                        <input type="checkbox" id="trending-checkbox"> Add to Trending
+                    </label>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="primary-btn">Add Video</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Add TikTok Video Modal -->
+    <div id="add-tiktok-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Add New TikTok Video</h2>
+            <form id="add-tiktok-form">
+                <div class="form-group">
+                    <label for="tiktok-title">Title</label>
+                    <input type="text" id="tiktok-title" required>
+                </div>
+                <div class="form-group">
+                    <label for="tiktok-video-url">Video URL</label>
+                    <input type="text" id="tiktok-video-url" required>
+                </div>
+                <div class="form-group">
+                    <label for="tiktok-direct-link">Direct Link</label>
+                    <input type="text" id="tiktok-direct-link" required>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="primary-btn">Add TikTok Video</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script src="../js/admin.js"></script>
+</body>
+</html>

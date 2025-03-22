@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Videos - Toxy18</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">
+            <h1>Toxy18</h1>
+        </div>
+        <div class="nav-links">
+            <a href="index.html"><i class="fas fa-home"></i> Home</a>
+            <a href="trending.html"><i class="fas fa-fire"></i> Trending</a>
+            <a href="new.html" class="active"><i class="fas fa-plus-circle"></i> New</a>
+            <a href="tiktok.html"><i class="fab fa-tiktok"></i> TikTok</a>
+        </div>
+        <div class="menu-btn">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <section class="new-videos-section">
+            <h2>New Videos</h2>
+            <div class="video-grid" id="new-videos-grid">
+                <!-- New videos will be dynamically loaded here -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Toxy18. All rights reserved.</p>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Fetch new videos
+            fetchNewVideos();
+        });
+
+        function fetchNewVideos() {
+            // This would normally be an API call to your backend
+            // For now, we'll use sample data
+            const sampleVideos = [
+                {
+                    id: 1,
+                    title: 'New Video 1',
+                    thumbnail: 'https://via.placeholder.com/300x169',
+                    directLink: 'https://example.com/new1',
+                    date: '2023-10-15'
+                },
+                {
+                    id: 2,
+                    title: 'New Video 2',
+                    thumbnail: 'https://via.placeholder.com/300x169',
+                    directLink: 'https://example.com/new2',
+                    date: '2023-10-14'
+                },
+                {
+                    id: 3,
+                    title: 'New Video 3',
+                    thumbnail: 'https://via.placeholder.com/300x169',
+                    directLink: 'https://example.com/new3',
+                    date: '2023-10-13'
+                },
+                {
+                    id: 4,
+                    title: 'New Video 4',
+                    thumbnail: 'https://via.placeholder.com/300x169',
+                    directLink: 'https://example.com/new4',
+                    date: '2023-10-12'
+                },
+                {
+                    id: 5,
+                    title: 'New Video 5',
+                    thumbnail: 'https://via.placeholder.com/300x169',
+                    directLink: 'https://example.com/new5',
+                    date: '2023-10-11'
+                },
+                {
+                    id: 6,
+                    title: 'New Video 6',
+                    thumbnail: 'https://via.placeholder.com/300x169',
+                    directLink: 'https://example.com/new6',
+                    date: '2023-10-10'
+                },
+                {
+                    id: 7,
+                    title: 'New Video 7',
+                    thumbnail: 'https://via.placeholder.com/300x169',
+                    directLink: 'https://example.com/new7',
+                    date: '2023-10-09'
+                },
+                {
+                    id: 8,
+                    title: 'New Video 8',
+                    thumbnail: 'https://via.placeholder.com/300x169',
+                    directLink: 'https://example.com/new8',
+                    date: '2023-10-08'
+                }
+            ];
+
+            // Sort by date (newest first)
+            sampleVideos.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            const newVideosGrid = document.getElementById('new-videos-grid');
+            if (newVideosGrid) {
+                sampleVideos.forEach(video => {
+                    newVideosGrid.appendChild(createVideoCard(video));
+                });
+            }
+        }
+    </script>
+</body>
+</html>

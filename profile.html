@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile - Toxy18</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .profile-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .profile-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 20px;
+        }
+        
+        .profile-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .profile-info h1 {
+            margin-bottom: 5px;
+            color: #fff;
+        }
+        
+        .profile-stats {
+            display: flex;
+            gap: 20px;
+            color: #aaa;
+        }
+        
+        .profile-tabs {
+            display: flex;
+            border-bottom: 1px solid #333;
+            margin-bottom: 20px;
+        }
+        
+        .profile-tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            color: #aaa;
+            border-bottom: 2px solid transparent;
+        }
+        
+        .profile-tab.active {
+            color: #fff;
+            border-bottom-color: #ff0000;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .saved-videos, .liked-videos, .history-videos {
+            margin-top: 20px;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 50px 0;
+            color: #aaa;
+        }
+        
+        .empty-state i {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: #555;
+        }
+        
+        .empty-state h2 {
+            margin-bottom: 10px;
+            color: #fff;
+        }
+        
+        .empty-state p {
+            font-size: 16px;
+        }
+        
+        .settings-form {
+            max-width: 600px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #fff;
+        }
+        
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            background-color: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 4px;
+            color: #fff;
+        }
+        
+        .form-group button {
+            padding: 10px 20px;
+            background-color: #ff0000;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">
+            <h1>Toxy18</h1>
+        </div>
+        <div class="nav-links">
+            <a href="index.html"><i class="fas fa-home"></i> Home</a>
+            <a href="trending.html"><i class="fas fa-fire"></i> Trending</a>
+            <a href="new.html"><i class="fas fa-plus-circle"></i> New</a>
+            <a href="tiktok.html"><i class="fab fa-tiktok"></i> TikTok</a>
+            <a href="search.html"><i class="fas fa-search"></i> Search</a>
+        </div>
+        <div class="menu-btn">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- Profile Container -->
+    <div class="profile-container">
+        <div class="profile-header">
+            <div class="profile-avatar">
+                <img src="https://via.placeholder.com/100" alt="User Avatar">
+            </div>
+            <div class="profile-info">
+                <h1>User123</h1>
+                <div class="profile-stats">
+                    <span><i class="fas fa-video"></i> 0 Videos</span>
+                    <span><i class="fas fa-heart"></i> 15 Likes</span>
+                    <span><i class="fas fa-bookmark"></i> 8 Saved</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="profile-tabs">
+            <div class="profile-tab active" data-tab="saved">Saved Videos</div>
+            <div class="profile-tab" data-tab="liked">Liked Videos</div>
+            <div class="profile-tab" data-tab="history">Watch History</div>
+            <div class="profile-tab" data-tab="settings">Settings</div>
+        </div>
+        
+        <div class="tab-content active" id="saved-tab">
+            <div class="saved-videos">
+                <h2>Saved Videos</h2>
+                <div class="video-grid" id="saved-videos-grid">
+                    <!-- Saved videos will be dynamically loaded here -->
+                </div>
+                
+                <div class="empty-state" id="saved-empty-state" style="display: none;">
+                    <i class="fas fa-bookmark"></i>
+                    <h2>No saved videos yet</h2>
+                    <p>Videos you save will appear here</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="tab-content" id="liked-tab">
+            <div class="liked-videos">
+                <h2>Liked Videos</h2>
+                <div class="video-grid" id="liked-videos-grid">
+                    <!-- Liked videos will be dynamically loaded here -->
+                </div>
+                
+                <div class="empty-state" id="liked-empty-state" style="display: none;">
+                    <i class="fas fa-heart"></i>
+                    <h2>No liked videos yet</h2>
+                    <p>Videos you like will appear here</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="tab-content" id="history-tab">
+            <div class="history-videos">
+                <h2>Watch History</h2>
+                <div class="video-grid" id="history-videos-grid">
+                    <!-- History videos will be dynamically loaded here -->
+                </div>
+                
+                <div class="empty-state" id="history-empty-state" style="display: none;">
+                    <i class="fas fa-history"></i>
+                    <h2>No watch history yet</h2>
+                    <p>Videos you watch will appear here</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="tab-content" id="settings-tab">
+            <div class="settings">
+                <h2>Account Settings</h2>
+                <form class="settings-form" id="settings-form">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" value="User123">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" value="user@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="bio">Bio</label>
+                        <textarea id="bio" rows="4">This is my profile on Toxy18.</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="avatar">Avatar URL</label>
+                        <input type="text" id="avatar" value="https://via.placeholder.com/100">
+                    </div>
+                    <div class="form-group">
+                        <button type="submit">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2023 Toxy18. All rights reserved.</p>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const menuBtn = document.querySelector('.menu-btn');
+            const navLinks = document.querySelector('.nav-links');
+
+            if (menuBtn) {
+                menuBtn.addEventListener('click', function() {
+                    navLinks.classList.toggle('active');
+                });
+            }
+            
+            // Tab switching
+            const tabs = document.querySelectorAll('.profile-tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Remove active class from all tabs and contents
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tabContents.forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to clicked tab
+                    this.classList.add('active');
+                    
+                    // Show corresponding content
+                    const tabId = this.getAttribute('data-tab');
+                    document.getElementById(`${tabId}-tab`).classList.add('active');
+                });
+            });
+            
+            // Load saved videos
+            loadSavedVideos();
+            
+            // Load liked videos
+            loadLikedVideos();
+            
+            // Load watch history
+            loadWatchHistory();
+            
+            // Handle settings form submission
+            const settingsForm = document.getElementById('settings-form');
+            if (settingsForm) {
+                settingsForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // In a real application, you would send the form data to the server
+                    // For now, we'll just show an alert
+                    alert('Settings saved successfully!');
+                    
+                    // Update profile info with new username
+                    const username = document.getElementById('username').value;
+                    const profileName = document.querySelector('.profile-info h1');
+                    if (profileName) {
+                        profileName.textContent = username;
+                    }
+                    
+                    // Update avatar with new URL
+                    const avatarUrl = document.getElementById('avatar').value;
+                    const profileAvatar = document.querySelector('.profile-avatar img');
+                    if (profileAvatar) {
+                        profileAvatar.src = avatarUrl;
+                    }
+                });
+            }
+        });
+        
+        function loadSavedVideos() {
+            // In a real application, you would fetch saved videos from the server
+            // For now, we'll use sample data
+            const savedVideos = [
+                {
+                    id: 'saved1',
+                    title: 'Saved Video 1',
+                    thumbnail: 'https://via.placeholder.com/300x169',
+                    directLink: 'player.html?id=saved1',
+                    date: '2023-10-15'
+                },
+                {
+                    id: 'saved2',
+                    title: 'Saved Video 2',
+                    thumbnail: 'https://via.placeholder.com/300x169',
+                    directLink: 'player.html?id=saved2',
+                    date: '2023-10-14'
+                }
+            ];
+            
+            const savedVideosGrid = document.getElementById('saved-videos-grid');
+            const savedEmptyState = document.getElementById('saved-empty-state');
+            
+            if (savedVideosGrid) {
+                if (savedVideos.length > 0) {
+                    savedVideos.forEach(video => {
+                        savedVideosGrid.appendChild(createVideoCard(video));
+                    });
+                    
+                    if (savedEmptyState) {
+                        savedEmptyState.style.display = 'none';
+                    }
+                } else {
+                    if (savedEmptyState) {
+                        savedEmptyState.style.display = 'block';
+                    }
+                }
+            }
+        }
+        
+        function loadLikedVideos() {
+            // In a real application, you would fetch liked videos from the server
+            // For now, we'll use sample data
+            const likedVideos = [
+                {
+                    id: 'liked1',
+                    title: 'Liked Video 1',
+                    thumbnail: 'https://via.placeholder.com/300x169',
+                    directLink: 'player.html?id=liked1',
+                    date: '2023-10-13'
+                },
+                {
+                    id: 'liked2',
+                    title: 'Liked Video 2',
+                    thumbnail: 'https://via.placeholder.com/300x169',
+                    directLink: 'player.html?id=liked2',
+                    date: '2023-10-12'
+                },
+                {
+                    id: 'liked3',
+                    title: 'Liked Video 3',
+                    thumbnail: 'https://via.placeholder.com/300x169',
+                    directLink: 'player.html?id=liked3',
+                    date: '2023-10-11'
+                }
+            ];
+            
+            const likedVideosGrid = document.getElementById('liked-videos-grid');
+            const likedEmptyState = document.getElementById('liked-empty-state');
+            
+            if (likedVideosGrid) {
+                if (likedVideos.length > 0) {
+                    likedVideos.forEach(video => {
+                        likedVideosGrid.appendChild(createVideoCard(video));
+                    });
+                    
+                    if (likedEmptyState) {
+                        likedEmptyState.style.display = 'none';
+                    }
+                } else {
+                    if (likedEmptyState) {
+                        likedEmptyState.style.display = 'block';
+                    }
+                }
+            }
+        }
+        
+        function loadWatchHistory() {
+            // In a real application, you would fetch watch history from the server
+            // For now, we'll use sample data
+            const historyVideos = [
+                {
+                    id: 'history1',
+                    title: 'History Video 1',
+                    thumbnail: 'https://via.placeholder.com/300x169',
+                    directLink: 'player.html?id=history1',
+                    date: '2023-10-15'
+                },
+                {
+                    id: 'history2',
+                    title: 'History Video 2',
+                    thumbnail: 'https://via.placeholder.com/300x169',
+                    directLink: 'player.html?id=history2',
+                    date: '2023-10-15'
+                },
+                {
+                    id: 'history3',
+                    title: 'History Video 3',
+                    thumbnail: 'https://via.placeholder.com/300x169',
+                    directLink: 'player.html?id=history3',
+                    date: '2023-10-14'
+                },
+                {
+                    id: 'history4',
+                    title: 'History Video 4',
+                    thumbnail: 'https://via.placeholder.com/300x169',
+                    directLink: 'player.html?id=history4',
+                    date: '2023-10-14'
+                }
+            ];
+            
+            const historyVideosGrid = document.getElementById('history-videos-grid');
+            const historyEmptyState = document.getElementById('history-empty-state');
+            
+            if (historyVideosGrid) {
+                if (historyVideos.length > 0) {
+                    historyVideos.forEach(video => {
+                        historyVideosGrid.appendChild(createVideoCard(video));
+                    });
+                    
+                    if (historyEmptyState) {
+                        historyEmptyState.style.display = 'none';
+                    }
+                } else {
+                    if (historyEmptyState) {
+                        historyEmptyState.style.display = 'block';
+                    }
+                }
+            }
+        }
+        
+        function createVideoCard(video) {
+            const videoCard = document.createElement('div');
+            videoCard.className = 'video-card';
+            
+            videoCard.innerHTML = `
+                <div class="thumbnail">
+                    <img src="${video.thumbnail}" alt="${video.title}">
+                    <button class="play-btn"><i class="fas fa-play"></i></button>
+                </div>
+                <div class="video-info">
+                    <h3>${video.title}</h3>
+                    <p>Added on ${formatDate(video.date)}</p>
+                </div>
+            `;
+            
+            // Add click event to navigate to the video
+            videoCard.addEventListener('click', function() {
+                window.location.href = video.directLink;
+            });
+            
+            return videoCard;
+        }
+        
+        function formatDate(dateString) {
+            const options = { year: 'numeric', month: 'short', day: 'numeric' };
+            return new Date(dateString).toLocaleDateString(undefined, options);
+        }
+    </script>
+</body>
+</html>

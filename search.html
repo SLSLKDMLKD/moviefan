@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results - Toxy18</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .search-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .search-header {
+            margin-bottom: 30px;
+        }
+        
+        .search-form {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        
+        .search-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 1px solid #333;
+            border-right: none;
+            border-radius: 4px 0 0 4px;
+            background-color: #1a1a1a;
+            color: #fff;
+            font-size: 16px;
+        }
+        
+        .search-btn {
+            padding: 12px 20px;
+            background-color: #ff0000;
+            color: #fff;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .search-results {
+            margin-top: 20px;
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 50px 0;
+            color: #aaa;
+        }
+        
+        .no-results i {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: #555;
+        }
+        
+        .no-results h2 {
+            margin-bottom: 10px;
+            color: #fff;
+        }
+        
+        .no-results p {
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">
+            <h1>Toxy18</h1>
+        </div>
+        <div class="nav-links">
+            <a href="index.html"><i class="fas fa-home"></i> Home</a>
+            <a href="trending.html"><i class="fas fa-fire"></i> Trending</a>
+            <a href="new.html"><i class="fas fa-plus-circle"></i> New</a>
+            <a href="tiktok.html"><i class="fab fa-tiktok"></i> TikTok</a>
+            <a href="search.html" class="active"><i class="fas fa-search"></i> Search</a>
+        </div>
+        <div class="menu-btn">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- Search Container -->
+    <div class="search-container">
+        <div class="search-header">
+            <h1>Search Videos</h1>
+            <form class="search-form" id="search-form">
+                <input type="text" class="search-input" id="search-input" placeholder="Search for videos..." required>
+                <button type="submit" class="search-btn"><i class="fas fa-search"></i></button>
+            </form>
+        </div>
+        
+        <div class="search-results">
+            <h2>Search Results: <span id="search-query-display"></span></h2>
+            <div class="video-grid" id="search-results-grid">
+                <!-- Search results will be dynamically loaded here -->
+            </div>
+            
+            <div class="no-results" id="no-results" style="display: none;">
+                <i class="fas fa-search"></i>
+                <h2>No results found</h2>
+                <p>Try different keywords or check your spelling</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2023 Toxy18. All rights reserved.</p>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const menuBtn = document.querySelector('.menu-btn');
+            const navLinks = document.querySelector('.nav-links');
+
+            if (menuBtn) {
+                menuBtn.addEventListener('click', function() {
+                    navLinks.classList.toggle('active');
+                });
+            }
+            
+            // Get search query from URL parameter
+            const urlParams = new URLSearchParams(window.location.search);
+            const searchQuery = urlParams.get('q');
+            
+            if (searchQuery) {
+                // Set the search input value
+                const searchInput = document.getElementById('search-input');
+                if (searchInput) {
+                    searchInput.value = searchQuery;
+                }
+                
+                // Display the search query
+                const searchQueryDisplay = document.getElementById('search-query-display');
+                if (searchQueryDisplay) {
+                    searchQueryDisplay.textContent = `"${searchQuery}"`;
+                }
+                
+                // Perform search
+                performSearch(searchQuery);
+            }
+            
+            // Set up search form submission
+            const searchForm = document.getElementById('search-form');
+            if (searchForm) {
+                searchForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const searchInput = document.getElementById('search-input');
+                    if (searchInput && searchInput.value.trim()) {
+                        // Redirect to search page with query parameter
+                        window.location.href = `search.html?q=${encodeURIComponent(searchInput.value.trim())}`;
+                    }
+                });
+            }
+        });
+        
+        function performSearch(query) {
+            // In a real application, you would send a request to the server to search for videos
+            // For now, we'll use sample data and filter based on the query
+            const sampleVideos = [
+                {
+                    id: 1,
+                    title: 'Amazing Nature Video',
+                    thumbnail: 'https://via.placeholder.com/300x169',
+                    directLink: 'https://example.com/video1',
+                    date: '2023-10-15',
+                    description: 'Explore the beauty of nature in this stunning video.'
+                },
+                {
+                    id: 2,
+                    title: 'Music Video 2023',
+                    thumbnail: 'https://via.placeholder.com/300x169',
+                    directLink: 'https://example.com/video2',
+                    date: '2023-10-14',
+                    description: 'The latest music video from top artists.'
+                },
+                {
+                    id: 3,
+                    title: 'Gaming Highlights',
+                    thumbnail: 'https://via.placeholder.com/300x169',
+                    directLink: 'https://example.com/video3',
+                    date: '2023-10-13',
+                    description: 'Watch the best gaming moments of the week.'
+                },
+                {
+                    id: 4,
+                    title: 'Cooking Tutorial',
+                    thumbnail: 'https://via.placeholder.com/300x169',
+                    directLink: 'https://example.com/video4',
+                    date: '2023-10-12',
+                    description: 'Learn how to cook delicious meals with this tutorial.'
+                },
+                {
+                    id: 5,
+                    title: 'Travel Vlog: Paris',
+                    thumbnail: 'https://via.placeholder.com/300x169',
+                    directLink: 'https://example.com/video5',
+                    date: '2023-10-11',
+                    description: 'Join me as I explore the beautiful city of Paris.'
+                },
+                {
+                    id: 6,
+                    title: 'Fitness Workout Routine',
+                    thumbnail: 'https://via.placeholder.com/300x169',
+                    directLink: 'https://example.com/video6',
+                    date: '2023-10-10',
+                    description: 'A complete workout routine for beginners.'
+                }
+            ];
+            
+            // Filter videos based on search query
+            const searchResults = sampleVideos.filter(video => {
+                const lowerCaseQuery = query.toLowerCase();
+                return (
+                    video.title.toLowerCase().includes(lowerCaseQuery) ||
+                    video.description.toLowerCase().includes(lowerCaseQuery)
+                );
+            });
+            
+            // Display search results
+            const searchResultsGrid = document.getElementById('search-results-grid');
+            const noResults = document.getElementById('no-results');
+            
+            if (searchResultsGrid) {
+                // Clear previous results
+                searchResultsGrid.innerHTML = '';
+                
+                if (searchResults.length > 0) {
+                    // Show results
+                    searchResults.forEach(video => {
+                        searchResultsGrid.appendChild(createVideoCard(video));
+                    });
+                    
+                    // Hide no results message
+                    if (noResults) {
+                        noResults.style.display = 'none';
+                    }
+                } else {
+                    // Show no results message
+                    if (noResults) {
+                        noResults.style.display = 'block';
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>

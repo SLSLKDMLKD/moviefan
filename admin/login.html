@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - Toxy18</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        
+        .login-container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            width: 400px;
+            padding: 40px;
+        }
+        
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .login-header h1 {
+            color: #ff0000;
+            margin-bottom: 10px;
+        }
+        
+        .login-form .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .login-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .login-form .input-group {
+            position: relative;
+        }
+        
+        .login-form .input-group i {
+            position: absolute;
+            top: 50%;
+            left: 15px;
+            transform: translateY(-50%);
+            color: #999;
+        }
+        
+        .login-form input {
+            width: 100%;
+            padding: 12px 15px 12px 45px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .login-form input:focus {
+            border-color: #ff0000;
+            outline: none;
+        }
+        
+        .login-form button {
+            width: 100%;
+            padding: 12px;
+            background-color: #ff0000;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .login-form button:hover {
+            background-color: #cc0000;
+        }
+        
+        .remember-me {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .remember-me input {
+            margin-right: 10px;
+            width: auto;
+        }
+        
+        .back-to-site {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .back-to-site a {
+            color: #666;
+            text-decoration: none;
+        }
+        
+        .back-to-site a:hover {
+            color: #ff0000;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <h1>Toxy18</h1>
+            <p>Admin Panel Login</p>
+        </div>
+        
+        <form class="login-form" id="login-form">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <div class="input-group">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="username" name="username" required>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password</label>
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="password" name="password" required>
+                </div>
+            </div>
+            
+            <div class="remember-me">
+                <input type="checkbox" id="remember" name="remember">
+                <label for="remember">Remember me</label>
+            </div>
+            
+            <button type="submit">Login</button>
+        </form>
+        
+        <div class="back-to-site">
+            <a href="../index.html"><i class="fas fa-arrow-left"></i> Back to Website</a>
+        </div>
+    </div>
+    
+    <script>
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            // In a real application, you would send these credentials to the server for validation
+            // For this demo, we'll use a simple check
+            if (username === 'admin' && password === 'password') {
+                // Redirect to admin dashboard
+                window.location.href = 'index.html';
+            } else {
+                alert('Invalid username or password. Please try again.');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TikTok Videos - Toxy18</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            overflow-y: hidden;
+        }
+        
+        .tiktok-page {
+            height: calc(100vh - 70px);
+            overflow: hidden;
+        }
+        
+        .tiktok-container {
+            height: 100%;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+            padding-bottom: 50px;
+        }
+        
+        .tiktok-video-wrapper {
+            height: 100%;
+            scroll-snap-align: start;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .tiktok-video {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            max-height: 90vh;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            background-color: #000;
+        }
+        
+        .tiktok-video video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        
+        .video-info-overlay {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            color: white;
+            z-index: 10;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+        }
+        
+        .video-actions {
+            position: absolute;
+            right: 20px;
+            bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .action-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+        }
+        
+        .action-btn span {
+            font-size: 0.8rem;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">
+            <h1>Toxy18</h1>
+        </div>
+        <div class="nav-links">
+            <a href="index.html"><i class="fas fa-home"></i> Home</a>
+            <a href="trending.html"><i class="fas fa-fire"></i> Trending</a>
+            <a href="new.html"><i class="fas fa-plus-circle"></i> New</a>
+            <a href="tiktok.html" class="active"><i class="fab fa-tiktok"></i> TikTok</a>
+        </div>
+        <div class="menu-btn">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- TikTok Style Videos -->
+    <div class="tiktok-page">
+        <div class="tiktok-container" id="tiktok-container">
+            <!-- TikTok videos will be dynamically loaded here -->
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const menuBtn = document.querySelector('.menu-btn');
+            const navLinks = document.querySelector('.nav-links');
+
+            if (menuBtn) {
+                menuBtn.addEventListener('click', function() {
+                    navLinks.classList.toggle('active');
+                });
+            }
+
+            // Fetch TikTok videos
+            fetchTikTokVideos();
+            
+            // Handle scroll events for video playback
+            const tiktokContainer = document.getElementById('tiktok-container');
+            if (tiktokContainer) {
+                tiktokContainer.addEventListener('scroll', handleScroll);
+            }
+        });
+
+        function fetchTikTokVideos() {
+            // This would normally be an API call to your backend
+            // For now, we'll use sample data
+            const sampleVideos = [
+                {
+                    id: 1,
+                    title: 'TikTok Video 1',
+                    videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-young-mother-with-her-little-daughter-decorating-a-christmas-tree-39745-large.mp4',
+                    directLink: 'https://example.com/tiktok1',
+                    likes: 1245,
+                    shares: 324
+                },
+                {
+                    id: 2,
+                    title: 'TikTok Video 2',
+                    videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-mother-with-her-little-daughter-eating-a-marshmallow-in-nature-39764-large.mp4',
+                    directLink: 'https://example.com/tiktok2',
+                    likes: 2341,
+                    shares: 532
+                },
+                {
+                    id: 3,
+                    title: 'TikTok Video 3',
+                    videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-girl-in-neon-sign-1232-large.mp4',
+                    directLink: 'https://example.com/tiktok3',
+                    likes: 5432,
+                    shares: 765
+                },
+                {
+                    id: 4,
+                    title: 'TikTok Video 4',
+                    videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-tree-with-yellow-flowers-1173-large.mp4',
+                    directLink: 'https://example.com/tiktok4',
+                    likes: 987,
+                    shares: 146
+                },
+                {
+                    id: 5,
+                    title: 'TikTok Video 5',
+                    videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-woman-running-through-forest-32807-large.mp4',
+                    directLink: 'https://example.com/tiktok5',
+                    likes: 3421,
+                    shares: 543
+                }
+            ];
+
+            const tiktokContainer = document.getElementById('tiktok-container');
+            if (tiktokContainer) {
+                sampleVideos.forEach(video => {
+                    tiktokContainer.appendChild(createTikTokVideo(video));
+                });
+                
+                // Play the first video
+                if (tiktokContainer.children.length > 0) {
+                    const firstVideo = tiktokContainer.children[0].querySelector('video');
+                    if (firstVideo) {
+                        firstVideo.play();
+                    }
+                }
+            }
+        }
+
+        function createTikTokVideo(video) {
+            const videoWrapper = document.createElement('div');
+            videoWrapper.className = 'tiktok-video-wrapper';
+            
+            videoWrapper.innerHTML = `
+                <div class="tiktok-video">
+                    <video src="${video.videoUrl}" loop></video>
+                    <div class="video-info-overlay">
+                        <h3>${video.title}</h3>
+                    </div>
+                    <div class="video-actions">
+                        <button class="action-btn like-btn">
+                            <i class="fas fa-heart"></i>
+                            <span>${formatNumber(video.likes)}</span>
+                        </button>
+                        <button class="action-btn share-btn">
+                            <i class="fas fa-share"></i>
+                            <span>${formatNumber(video.shares)}</span>
+                        </button>
+                        <button class="action-btn direct-link-btn">
+                            <i class="fas fa-external-link-alt"></i>
+                            <span>Link</span>
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            // Add click event to open video in new window
+            const directLinkBtn = videoWrapper.querySelector('.direct-link-btn');
+            if (directLinkBtn) {
+                directLinkBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    window.open(video.directLink, '_blank');
+                });
+            }
+            
+            // Add click event to play/pause video
+            const videoElement = videoWrapper.querySelector('video');
+            if (videoElement) {
+                videoElement.addEventListener('click', function() {
+                    if (videoElement.paused) {
+                        videoElement.play();
+                    } else {
+                        videoElement.pause();
+                    }
+                });
+            }
+            
+            return videoWrapper;
+        }
+
+        function handleScroll() {
+            const tiktokContainer = document.getElementById('tiktok-container');
+            if (!tiktokContainer) return;
+            
+            const videoWrappers = tiktokContainer.querySelectorAll('.tiktok-video-wrapper');
+            
+            videoWrappers.forEach(wrapper => {
+                const rect = wrapper.getBoundingClientRect();
+                const video = wrapper.querySelector('video');
+                
+                // If video is mostly visible in the viewport
+                if (rect.top >= -rect.height/2 && rect.top <= window.innerHeight - rect.height/2) {
+                    if (video && video.paused) {
+                        video.play();
+                    }
+                } else {
+                    if (video && !video.paused) {
+                        video.pause();
+                    }
+                }
+            });
+        }
+        
+        // Helper function to format numbers (e.g., 1.2K, 3.4M)
+        function formatNumber(num) {
+            if (num >= 1000000) {
+                return (num / 1000000).toFixed(1) + 'M';
+            } else if (num >= 1000) {
+                return (num / 1000).toFixed(1) + 'K';
+            } else {
+                return num.toString();
+            }
+        }
+    </script>
+</body>
+</html>

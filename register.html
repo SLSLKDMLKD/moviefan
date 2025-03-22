@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Toxy18</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .auth-container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #1a1a1a;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .auth-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .auth-header h1 {
+            color: #ff0000;
+            margin-bottom: 10px;
+        }
+        
+        .auth-form .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .auth-form label {
+            display: block;
+            margin-bottom: 8px;
+            color: #fff;
+        }
+        
+        .auth-form .input-group {
+            position: relative;
+        }
+        
+        .auth-form .input-group i {
+            position: absolute;
+            top: 50%;
+            left: 15px;
+            transform: translateY(-50%);
+            color: #999;
+        }
+        
+        .auth-form input {
+            width: 100%;
+            padding: 12px 15px 12px 45px;
+            background-color: #222;
+            border: 1px solid #333;
+            border-radius: 4px;
+            color: #fff;
+            font-size: 16px;
+        }
+        
+        .auth-form input:focus {
+            border-color: #ff0000;
+            outline: none;
+        }
+        
+        .auth-form button {
+            width: 100%;
+            padding: 12px;
+            background-color: #ff0000;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .auth-form button:hover {
+            background-color: #cc0000;
+        }
+        
+        .auth-footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #aaa;
+        }
+        
+        .auth-footer a {
+            color: #ff0000;
+            text-decoration: none;
+        }
+        
+        .auth-footer a:hover {
+            text-decoration: underline;
+        }
+        
+        .terms {
+            margin-bottom: 20px;
+            color: #aaa;
+            font-size: 14px;
+        }
+        
+        .terms a {
+            color: #ff0000;
+            text-decoration: none;
+        }
+        
+        .terms a:hover {
+            text-decoration: underline;
+        }
+        
+        .social-login {
+            margin-top: 30px;
+            text-align: center;
+        }
+        
+        .social-login p {
+            color: #aaa;
+            margin-bottom: 15px;
+            position: relative;
+        }
+        
+        .social-login p::before,
+        .social-login p::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            width: 35%;
+            height: 1px;
+            background-color: #333;
+        }
+        
+        .social-login p::before {
+            left: 0;
+        }
+        
+        .social-login p::after {
+            right: 0;
+        }
+        
+        .social-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .social-button {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #222;
+            color: #fff;
+            font-size: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .social-button.facebook:hover {
+            background-color: #3b5998;
+        }
+        
+        .social-button.google:hover {
+            background-color: #db4437;
+        }
+        
+        .social-button.twitter:hover {
+            background-color: #1da1f2;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">
+            <h1>Toxy18</h1>
+        </div>
+        <div class="nav-links">
+            <a href="index.html"><i class="fas fa-home"></i> Home</a>
+            <a href="trending.html"><i class="fas fa-fire"></i> Trending</a>
+            <a href="new.html"><i class="fas fa-plus-circle"></i> New</a>
+            <a href="tiktok.html"><i class="fab fa-tiktok"></i> TikTok</a>
+            <a href="search.html"><i class="fas fa-search"></i> Search</a>
+        </div>
+        <div class="menu-btn">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- Register Container -->
+    <div class="auth-container">
+        <div class="auth-header">
+            <h1>Toxy18</h1>
+            <p>Create a new account</p>
+        </div>
+        
+        <form class="auth-form" id="register-form">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <div class="input-group">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="username" name="username" required>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email</label>
+                <div class="input-group">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="email" name="email" required>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password</label>
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="password" name="password" required>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="confirm-password">Confirm Password</label>
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="confirm-password" name="confirm-password" required>
+                </div>
+            </div>
+            
+            <div class="terms">
+                <p>By creating an account, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.</p>
+            </div>
+            
+            <button type="submit">Sign Up</button>
+        </form>
+        
+        <div class="social-login">
+            <p>Or sign up with</p>
+            <div class="social-buttons">
+                <div class="social-button facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </div>
+                <div class="social-button google">
+                    <i class="fab fa-google"></i>
+                </div>
+                <div class="social-button twitter">
+                    <i class="fab fa-twitter"></i>
+                </div>
+            </div>
+        </div>
+        
+        <div class="auth-footer">
+            <p>Already have an account? <a href="login.html">Sign In</a></p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2023 Toxy18. All rights reserved.</p>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const menuBtn = document.querySelector('.menu-btn');
+            const navLinks = document.querySelector('.nav-links');
+
+            if (menuBtn) {
+                menuBtn.addEventListener('click', function() {
+                    navLinks.classList.toggle('active');
+                });
+            }
+            
+            // Handle register form submission
+            const registerForm = document.getElementById('register-form');
+            if (registerForm) {
+                registerForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const username = document.getElementById('username').value;
+                    const email = document.getElementById('email').value;
+                    const password = document.getElementById('password').value;
+                    const confirmPassword = document.getElementById('confirm-password').value;
+                    
+                    // Validate form
+                    if (!username || !email || !password || !confirmPassword) {
+                        alert('Please fill in all fields.');
+                        return;
+                    }
+                    
+                    if (password !== confirmPassword) {
+                        alert('Passwords do not match.');
+                        return;
+                    }
+                    
+                    // In a real application, you would send the form data to the server
+                    // For now, we'll just redirect to the login page
+                    alert('Account created successfully! Please log in.');
+                    window.location.href = 'login.html';
+                });
+            }
+            
+            // Handle social signup buttons
+            const socialButtons = document.querySelectorAll('.social-button');
+            socialButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // In a real application, you would implement OAuth authentication
+                    // For now, we'll just show an alert
+                    alert('Social signup is not implemented in this demo.');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
